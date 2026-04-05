@@ -3,1106 +3,1028 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Futuriste</title>
+    <title>MBENGONO AKOA — Websites in 48h · $300</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/logo.png">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>emailjs.init('MTovP8aquYyYSzzNN');</script>
     <style>
         :root {
-            --primary-color: #00f3ff;
-            --secondary-color: #8a2be2;
-            --dark-bg: #0a0a16;
-            --card-bg: rgba(16, 18, 37, 0.7);
-            --text-color: #ffffff;
-            --accent-color: #ff00c8;
-            --transition: all 0.3s ease;
+            --cyan: #00f3ff;
+            --purple: #8a2be2;
+            --pink: #ff00c8;
+            --dark: #07071a;
+            --card: rgba(14, 16, 40, 0.75);
+            --white: #ffffff;
+            --muted: rgba(255,255,255,0.6);
+            --border: rgba(0,243,255,0.18);
+            --ease: all 0.3s cubic-bezier(.4,0,.2,1);
+            --font-head: 'Fraunces', Georgia, serif;
+            --font-body: 'Outfit', system-ui, sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            background-color: var(--dark-bg);
-            color: var(--text-color);
+            background: var(--dark);
+            color: var(--white);
+            font-family: var(--font-body);
             overflow-x: hidden;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        /* Effets de fond futuriste */
-        .bg-effects {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
+        /* ── BACKGROUND ── */
+        .bg-wrap {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
         }
-
-        .grid-lines {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
+        .grid {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(0,243,255,.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,243,255,.06) 1px, transparent 1px);
+            background-size: 52px 52px;
+            animation: gridScroll 25s linear infinite;
         }
+        @keyframes gridScroll { to { transform: translate(52px, 52px); } }
 
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .25; }
+        .orb-1 { width:420px; height:420px; background:var(--cyan); top:-80px; left:-80px; animation: drift 18s ease-in-out infinite; }
+        .orb-2 { width:280px; height:280px; background:var(--purple); bottom:10%; right:5%; animation: drift 14s ease-in-out infinite reverse; }
+        .orb-3 { width:200px; height:200px; background:var(--pink); bottom:30%; left:20%; animation: drift 11s ease-in-out infinite 2s; }
+        @keyframes drift { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-28px) scale(1.04)} }
 
-        .floating-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(40px);
-            opacity: 0.3;
-        }
-
-        .shape-1 {
-            width: 300px;
-            height: 300px;
-            background: var(--primary-color);
-            top: 10%;
-            left: 10%;
-            animation: float 15s infinite ease-in-out;
-        }
-
-        .shape-2 {
-            width: 200px;
-            height: 200px;
-            background: var(--secondary-color);
-            top: 60%;
-            right: 10%;
-            animation: float 12s infinite ease-in-out reverse;
-        }
-
-        .shape-3 {
-            width: 150px;
-            height: 150px;
-            background: var(--accent-color);
-            bottom: 10%;
-            left: 20%;
-            animation: float 10s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-20px) scale(1.05); }
-        }
-
-        /* Header et Navigation */
+        /* ── HEADER ── */
         header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            background: rgba(10, 10, 22, 0.8);
-            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+            position: fixed; top:0; width:100%; z-index:100;
+            padding: 18px 6%;
+            display: flex; justify-content:space-between; align-items:center;
+            background: rgba(7,7,26,.85);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
         }
-
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-decoration: none;
-            z-index: 1001;
+            font-family: var(--font-head);
+            font-size:1.4rem; font-weight:800;
+            background: linear-gradient(90deg,var(--cyan),var(--purple));
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+            text-decoration:none;
         }
-
-        nav {
-            display: flex;
-            align-items: center;
+        nav ul { display:flex; list-style:none; gap:28px; align-items:center; }
+        nav a { color:rgba(255,255,255,.75); text-decoration:none; font-size:.9rem; font-weight:500; transition:var(--ease); }
+        nav a:hover { color:var(--cyan); }
+        .nav-cta {
+            background: linear-gradient(90deg,var(--cyan),var(--purple));
+            color: var(--dark) !important;
+            padding: 8px 20px; border-radius:30px;
+            font-weight:700 !important;
+            font-size:.85rem !important;
         }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 30px;
-        }
-
-        nav ul li a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--primary-color);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-color);
-            transition: var(--transition);
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .lang-switcher {
-            display: flex;
-            align-items: center;
-            margin-left: 30px;
-        }
-
+        .lang-group { display:flex; gap:6px; align-items:center; }
         .lang-btn {
-            background: transparent;
-            border: 1px solid var(--primary-color);
-            color: var(--text-color);
-            padding: 5px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.9rem;
+            background:transparent; border:1px solid var(--border);
+            color:rgba(255,255,255,.7); padding:4px 12px; border-radius:20px;
+            cursor:pointer; font-size:.8rem; transition:var(--ease);
+            font-family:var(--font-body);
         }
+        .lang-btn.active { background:var(--cyan); color:var(--dark); border-color:var(--cyan); font-weight:700; }
 
-        .lang-btn.active {
-            background: var(--primary-color);
-            color: var(--dark-bg);
+        /* ── BURGER ── */
+        .burger { display:none; flex-direction:column; gap:5px; background:transparent; border:none; cursor:pointer; z-index:101; }
+        .burger span { display:block; width:26px; height:2px; background:var(--cyan); border-radius:2px; transition:var(--ease); }
+
+        /* ── SECTIONS ── */
+        section { position:relative; z-index:1; padding:110px 6%; }
+        .section-label {
+            display:inline-block;
+            font-size:.75rem; font-weight:700; letter-spacing:.15em;
+            color:var(--cyan); text-transform:uppercase;
+            border:1px solid rgba(0,243,255,.3);
+            padding:4px 14px; border-radius:20px;
+            margin-bottom:18px;
         }
-
-        .lang-btn:not(.active):hover {
-            background: rgba(0, 243, 255, 0.1);
-        }
-
-        /* Menu Burger */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 21px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        .menu-toggle span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background-color: var(--primary-color);
-            border-radius: 3px;
-            transition: var(--transition);
-        }
-
-        /* Sections principales */
-        section {
-            padding: 100px 5%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .hero {
-            text-align: center;
-            position: relative;
-            align-items: center;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: gradientShift 5s infinite alternate;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: var(--dark-bg);
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            max-width: 30rem;
-            margin: 0 auto;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
-            transition: var(--transition);
-            z-index: -1;
-        }
-
-        .cta-button:hover::before {
-            left: 0;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 243, 255, 0.3);
-        }
-
         .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            text-align: center;
-            position: relative;
+            font-family:var(--font-head);
+            font-size:clamp(1.8rem,4vw,2.8rem);
+            font-weight:600; line-height:1.2;
+            margin-bottom:16px;
+            letter-spacing:-0.01em;
         }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: var(--primary-color);
+        .section-title span {
+            background: linear-gradient(90deg,var(--cyan),var(--purple));
+            -webkit-background-clip:text; background-clip:text; color:transparent;
         }
+        .section-sub { color:var(--muted); max-width:560px; margin-bottom:50px; }
 
-        /* Cartes de projets */
+        /* ── HERO ── */
+        #home {
+            min-height: 100vh;
+            display: flex; flex-direction:column;
+            align-items:center; justify-content:center;
+            text-align:center; padding-top:120px;
+        }
+        .badge {
+            display:inline-flex; align-items:center; gap:8px;
+            background:rgba(0,243,255,.08); border:1px solid var(--border);
+            padding:6px 16px; border-radius:30px;
+            font-size:.8rem; color:var(--cyan); margin-bottom:28px;
+        }
+        .badge i { font-size:.65rem; }
+        .hero-title {
+            font-family:var(--font-head);
+            font-size: clamp(2.2rem, 6vw, 4.2rem);
+            font-weight:700; line-height:1.1;
+            max-width:780px;
+            background: linear-gradient(135deg,#fff 30%,var(--cyan) 65%,var(--purple) 100%);
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+            margin-bottom:22px;
+            letter-spacing:-0.01em;
+        }
+        .hero-sub {
+            font-size:clamp(1rem,2vw,1.25rem);
+            color:rgba(255,255,255,.72);
+            max-width:600px; margin:0 auto 36px;
+        }
+        .hero-btns { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
+        .btn-primary {
+            display:inline-flex; align-items:center; gap:8px;
+            background:linear-gradient(90deg,var(--cyan),var(--purple));
+            color:var(--dark); padding:14px 32px; border-radius:40px;
+            font-weight:700; font-size:1rem; text-decoration:none;
+            transition:var(--ease); border:none; cursor:pointer;
+            font-family:var(--font-body);
+        }
+        .btn-primary:hover { transform:translateY(-3px); box-shadow:0 12px 32px rgba(0,243,255,.35); }
+        .btn-ghost {
+            display:inline-flex; align-items:center; gap:8px;
+            border:1px solid var(--border); color:var(--white);
+            padding:14px 28px; border-radius:40px;
+            font-weight:500; font-size:1rem; text-decoration:none;
+            transition:var(--ease);
+        }
+        .btn-ghost:hover { border-color:var(--cyan); color:var(--cyan); transform:translateY(-3px); }
+        .hero-stats {
+            display:flex; gap:40px; flex-wrap:wrap; justify-content:center;
+            margin-top:64px; padding-top:40px;
+            border-top:1px solid var(--border);
+        }
+        .stat { text-align:center; }
+        .stat-num { font-family:var(--font-head); font-size:2rem; font-weight:800; color:var(--cyan); }
+        .stat-label { font-size:.8rem; color:var(--muted); margin-top:4px; }
+
+        /* ── PROFILE ── */
+        #profile {
+            display:grid; grid-template-columns:1fr 1fr; gap:70px;
+            align-items:center; padding:90px 6%;
+        }
+        .profile-img-wrap {
+            position:relative; max-width:380px;
+        }
+        .profile-img-wrap::before {
+            content:''; position:absolute; inset:-2px;
+            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--pink));
+            border-radius:24px; z-index:0;
+        }
+        /* 
+            ┌─ IMAGE INSTRUCTIONS ─────────────────────────────────────────────┐
+            │  Place your profile photo at: images/profile.jpg                 │
+            │  Recommended size: 600x600 px, square crop, face centered        │
+            │  Format: JPG or WebP for best performance                         │
+            └──────────────────────────────────────────────────────────────────┘
+        */
+        .profile-img {
+            width:100%; border-radius:22px;
+            position:relative; z-index:1;
+            display:block; object-fit:cover;
+            aspect-ratio:1/1;
+        }
+        .profile-placeholder {
+            width:100%; aspect-ratio:1/1; border-radius:22px;
+            background:linear-gradient(135deg,rgba(0,243,255,.15),rgba(138,43,226,.15));
+            display:flex; flex-direction:column; align-items:center; justify-content:center;
+            gap:12px; color:var(--muted); font-size:.85rem; position:relative; z-index:1;
+            border:1px solid var(--border);
+        }
+        .profile-placeholder i { font-size:3rem; color:var(--cyan); opacity:.5; }
+        .profile-text .section-label { margin-bottom:14px; }
+        .profile-name {
+            font-family:var(--font-head); font-size:clamp(1.6rem,3vw,2.2rem);
+            font-weight:600; margin-bottom:8px; letter-spacing:-0.01em;
+        }
+        .profile-role { color:var(--cyan); font-weight:600; margin-bottom:18px; }
+        .profile-bio { color:rgba(255,255,255,.75); margin-bottom:28px; }
+        .profile-links { display:flex; gap:14px; flex-wrap:wrap; }
+        .profile-link {
+            display:inline-flex; align-items:center; gap:8px;
+            padding:9px 20px; border-radius:30px;
+            text-decoration:none; font-size:.88rem; font-weight:600;
+            transition:var(--ease);
+        }
+        .profile-link.linkedin { background:rgba(0,119,181,.15); color:#0a84c8; border:1px solid rgba(0,119,181,.3); }
+        .profile-link.github { background:rgba(255,255,255,.05); color:var(--white); border:1px solid var(--border); }
+        .profile-link:hover { transform:translateY(-2px); filter:brightness(1.2); }
+
+        /* ── OFFER ── */
+        #offer { background:rgba(0,243,255,.02); }
+        .offer-grid {
+            display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:24px; margin-top:0;
+        }
+        .offer-card {
+            background:var(--card); border:1px solid var(--border);
+            border-radius:18px; padding:28px 24px;
+            display:flex; flex-direction:column; gap:12px;
+            backdrop-filter:blur(10px);
+            transition:var(--ease);
+        }
+        .offer-card:hover { border-color:var(--cyan); transform:translateY(-6px); box-shadow:0 16px 40px rgba(0,243,255,.12); }
+        .offer-icon { font-size:1.8rem; color:var(--cyan); }
+        .offer-card h3 { font-family:var(--font-head); font-weight:700; font-size:1.05rem; }
+        .offer-card p { color:var(--muted); font-size:.88rem; }
+        .price-block {
+            grid-column:1/-1;
+            background:linear-gradient(135deg,rgba(0,243,255,.08),rgba(138,43,226,.08));
+            border:1px solid rgba(0,243,255,.3);
+            border-radius:18px; padding:36px 32px;
+            display:flex; align-items:center; justify-content:space-between;
+            flex-wrap:wrap; gap:24px;
+        }
+        .price-left h3 { font-family:var(--font-head); font-size:1.2rem; font-weight:700; margin-bottom:8px; }
+        .price-left p { color:var(--muted); font-size:.9rem; max-width:380px; }
+        .price-tag { font-family:var(--font-head); font-size:3.5rem; font-weight:800;
+            background:linear-gradient(90deg,var(--cyan),var(--purple));
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+            line-height:1;
+        }
+        .price-tag span { font-size:1rem; font-weight:500; color:var(--muted); }
+        .price-note { font-size:.8rem; color:var(--muted); margin-top:6px; }
+
+        /* ── PROJECTS ── */
         .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
+            display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+            gap:28px;
         }
-
         .project-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: var(--transition);
-            border: 1px solid rgba(0, 243, 255, 0.2);
-            backdrop-filter: blur(10px);
+            background:var(--card); border:1px solid var(--border);
+            border-radius:20px; overflow:hidden;
+            backdrop-filter:blur(10px);
+            transition:var(--ease);
+            display:flex; flex-direction:column;
         }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 243, 255, 0.2);
-            border-color: var(--primary-color);
+        .project-card:hover { transform:translateY(-8px); border-color:var(--cyan); box-shadow:0 20px 50px rgba(0,243,255,.14); }
+        /*
+            ┌─ PROJECT IMAGE INSTRUCTIONS ─────────────────────────────────────┐
+            │  Folder: images/projects/                                         │
+            │  Files:                                                           │
+            │    agrofresh.png   or  agrofresh-demo.gif   (1200×800 px)        │
+            │    jelouetacaisse.png or jelouetacaisse-demo.gif                  │
+            │    hireafrica.png                                                 │
+            │    kontely.png                                                    │
+            │    wemenu.png                                                     │
+            │  Replace the <div class="project-thumb"> with:                   │
+            │    <img src="images/projects/agrofresh.png" alt="Agrofresh"      │
+            │         class="project-thumb-img">                                │
+            └──────────────────────────────────────────────────────────────────┘
+        */
+        .project-thumb {
+            height:210px; position:relative; overflow:hidden;
+            background:linear-gradient(135deg,rgba(0,243,255,.12),rgba(138,43,226,.12));
+            display:flex; align-items:center; justify-content:center;
+            font-size:3.5rem; color:rgba(0,243,255,.35);
+            border-bottom:1px solid var(--border);
         }
-
-        .project-img {
-            height: 200px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: var(--dark-bg);
+        .project-thumb-img { width:100%; height:100%; object-fit:cover; display:block; }
+        .project-thumb .thumb-label {
+            position:absolute; bottom:0; left:0; right:0;
+            background:linear-gradient(transparent,rgba(7,7,26,.85));
+            padding:20px 16px 10px;
+            font-size:.72rem; color:var(--muted);
+            font-family:var(--font-body);
         }
-
-        .project-content {
-            padding: 20px;
+        .project-status {
+            position:absolute; top:12px; right:12px;
+            background:rgba(255,165,0,.15); border:1px solid rgba(255,165,0,.4);
+            color:#ffaa00; font-size:.7rem; font-weight:700; padding:3px 10px;
+            border-radius:20px; letter-spacing:.08em;
         }
-
-        .project-content h3 {
-            margin-bottom: 10px;
-            font-size: 1.3rem;
+        .project-status.live {
+            background:rgba(0,243,255,.1); border-color:rgba(0,243,255,.35); color:var(--cyan);
         }
-
-        .project-content p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
+        .project-body { padding:22px; flex:1; display:flex; flex-direction:column; gap:10px; }
+        .project-body h3 { font-family:var(--font-head); font-size:1.15rem; font-weight:700; }
+        .project-body p { color:rgba(255,255,255,.68); font-size:.88rem; flex:1; }
+        .project-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
         .project-tags span {
-            background: rgba(0, 243, 255, 0.1);
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            color: var(--primary-color);
+            background:rgba(0,243,255,.08); border:1px solid rgba(0,243,255,.15);
+            color:var(--cyan); font-size:.75rem; padding:3px 10px; border-radius:12px;
+        }
+        .project-link {
+            display:inline-flex; align-items:center; gap:6px;
+            color:var(--cyan); text-decoration:none; font-size:.83rem; font-weight:600;
+            margin-top:8px; transition:var(--ease);
+        }
+        .project-link:hover { gap:10px; }
+
+        /* ── SKILLS ── */
+        .skills-grid {
+            display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+            gap:22px;
+        }
+        .skill-card {
+            background:var(--card); border:1px solid var(--border);
+            border-radius:18px; padding:26px 22px;
+            text-align:center; transition:var(--ease);
+            backdrop-filter:blur(10px);
+        }
+        .skill-card:hover { border-color:var(--cyan); transform:translateY(-5px); box-shadow:0 10px 28px rgba(0,243,255,.1); }
+        .skill-icon { font-size:2.2rem; color:var(--cyan); margin-bottom:14px; }
+        .skill-card h3 { font-family:var(--font-head); font-size:1rem; font-weight:700; margin-bottom:8px; }
+        .skill-card p { color:var(--muted); font-size:.84rem; }
+
+        /* ── EXPERIENCE ── */
+        .exp-box {
+            background:linear-gradient(135deg,rgba(0,243,255,.05),rgba(138,43,226,.05));
+            border:1px solid var(--border); border-radius:20px;
+            padding:44px 40px; text-align:center; max-width:680px; margin:0 auto;
+        }
+        .exp-box .exp-icon { font-size:2.8rem; color:var(--cyan); margin-bottom:18px; }
+        .exp-box h3 { font-family:var(--font-head); font-size:1.3rem; font-weight:700; margin-bottom:12px; }
+        .exp-box p { color:rgba(255,255,255,.7); margin-bottom:22px; }
+        .exp-box .exp-note {
+            font-size:.82rem; color:var(--muted);
+            border-top:1px solid var(--border); padding-top:18px; margin-top:6px;
         }
 
-        /* Section compétences */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
+        /* ── CONTACT ── */
+        .contact-wrap {
+            display:grid; grid-template-columns:1fr 1.3fr; gap:60px;
+            align-items:start;
         }
-
-        .skill-item {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            transition: var(--transition);
-            border: 1px solid rgba(0, 243, 255, 0.2);
+        .contact-intro { margin-bottom:36px; }
+        .contact-intro h3 { font-family:var(--font-head); font-size:1.5rem; font-weight:800; margin-bottom:10px; }
+        .contact-intro p { color:var(--muted); margin-bottom:8px; }
+        .contact-intro .note { color:var(--cyan); font-size:.88rem; font-weight:600; }
+        .contact-items { display:flex; flex-direction:column; gap:18px; }
+        .contact-item { display:flex; align-items:center; gap:14px; }
+        .citem-icon {
+            width:46px; height:46px; border-radius:50%; flex-shrink:0;
+            background:rgba(0,243,255,.08); border:1px solid var(--border);
+            display:flex; align-items:center; justify-content:center;
+            color:var(--cyan); font-size:1.1rem;
         }
-
-        .skill-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-color);
-            box-shadow: 0 10px 20px rgba(0, 243, 255, 0.1);
+        .citem-text h4 { font-family:var(--font-head); font-size:.92rem; font-weight:700; margin-bottom:2px; }
+        .citem-text a, .citem-text p { color:var(--muted); font-size:.88rem; text-decoration:none; transition:var(--ease); }
+        .citem-text a:hover { color:var(--cyan); }
+        .contact-form-wrap {
+            background:var(--card); border:1px solid var(--border);
+            border-radius:20px; padding:34px 30px;
+            backdrop-filter:blur(10px);
         }
-
-        .skill-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-
-        .skill-item h3 {
-            margin-bottom: 10px;
-        }
-
-        /* Section contact */
-        .contact-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 50px;
-            margin-top: 30px;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(0, 243, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--primary-color);
-        }
-
-        .contact-form {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid rgba(0, 243, 255, 0.2);
-        }
-
-        .contact-link {
-            color: var(--text-color);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .contact-link:hover {
-            color: var(--primary-color);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
+        .form-group { margin-bottom:18px; }
+        .form-group label { display:block; font-size:.85rem; font-weight:600; color:rgba(255,255,255,.75); margin-bottom:7px; }
         .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: var(--text-color);
-            transition: var(--transition);
+            width:100%; background:rgba(255,255,255,.04);
+            border:1px solid rgba(255,255,255,.1); border-radius:10px;
+            color:var(--white); padding:12px 15px;
+            font-family:var(--font-body); font-size:.9rem;
+            transition:var(--ease);
         }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(0, 243, 255, 0.2);
-        }
-
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-
+        .form-control:focus { outline:none; border-color:var(--cyan); box-shadow:0 0 0 3px rgba(0,243,255,.12); }
+        textarea.form-control { min-height:130px; resize:vertical; }
         .submit-btn {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: var(--dark-bg);
-            border: none;
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            width: 100%;
+            width:100%; background:linear-gradient(90deg,var(--cyan),var(--purple));
+            color:var(--dark); border:none; padding:14px;
+            border-radius:30px; font-weight:700; font-size:1rem;
+            cursor:pointer; font-family:var(--font-body);
+            transition:var(--ease); display:flex; align-items:center; justify-content:center; gap:8px;
         }
+        .submit-btn:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(0,243,255,.3); }
 
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 243, 255, 0.3);
-        }
-
-        /* Footer */
+        /* ── FOOTER ── */
         footer {
-            background: rgba(5, 5, 15, 0.9);
-            padding: 30px 5%;
-            text-align: center;
-            border-top: 1px solid rgba(0, 243, 255, 0.2);
+            position:relative; z-index:1;
+            background:rgba(4,4,18,.92);
+            border-top:1px solid var(--border);
+            padding:40px 6%; text-align:center;
         }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
+        .socials { display:flex; gap:14px; justify-content:center; margin-bottom:22px; }
+        .soc-link {
+            width:42px; height:42px; border-radius:50%;
+            background:rgba(0,243,255,.08); border:1px solid var(--border);
+            display:flex; align-items:center; justify-content:center;
+            color:var(--cyan); text-decoration:none;
+            transition:var(--ease); font-size:1rem;
         }
+        .soc-link:hover { background:var(--cyan); color:var(--dark); transform:translateY(-3px); }
+        .copy { color:var(--muted); font-size:.85rem; }
 
-        .social-link {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(0, 243, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: var(--transition);
+        /* ── SCROLL REVEAL ── */
+        .reveal { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
+        .reveal.visible { opacity:1; transform:none; }
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:900px) {
+            #profile { grid-template-columns:1fr; gap:40px; }
+            .profile-img-wrap { max-width:280px; margin:0 auto; }
+            .contact-wrap { grid-template-columns:1fr; gap:36px; }
         }
-
-        .social-link:hover {
-            background: var(--primary-color);
-            color: var(--dark-bg);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.3rem;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .projects-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            header {
-                padding: 15px 5%;
-            }
-            
-            .menu-toggle {
-                display: flex;
-            }
-            
+        @media(max-width:768px) {
+            section { padding:80px 5%; }
+            .burger { display:flex; }
             nav ul {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 70%;
-                height: 100vh;
-                background: rgba(10, 10, 22, 0.95);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transition: var(--transition);
-                z-index: 1000;
+                position:fixed; inset:0 0 0 auto; width:75%;
+                background:rgba(7,7,26,.97); backdrop-filter:blur(16px);
+                flex-direction:column; align-items:center; justify-content:center;
+                gap:28px; transform:translateX(100%); transition:var(--ease); z-index:100;
             }
-            
-            nav ul.active {
-                right: 0;
-            }
-            
-            nav ul li {
-                margin: 15px 0;
-            }
-            
-            .lang-switcher {
-                margin-left: 0;
-                margin-top: 20px;
-            }
-            
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            section {
-                padding: 80px 5%;
-            }
-            
-            .contact-container {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
+            nav ul.open { transform:none; }
+            nav a { font-size:1.1rem; }
+            .lang-group { margin-top:10px; }
+            .price-block { flex-direction:column; }
+            .hero-stats { gap:28px; }
         }
-
-        @media (max-width: 576px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-            }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .skills-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-item {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
-            }
-            
-            .social-links {
-                flex-wrap: wrap;
-            }
-            
-            nav ul {
-                width: 85%;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .section-title {
-                font-size: 1.6rem;
-            }
-            
-            .cta-button {
-                padding: 10px 25px;
-                font-size: 0.9rem;
-            }
-            
-            section {
-                padding: 70px 5%;
-            }
+        @media(max-width:480px) {
+            .projects-grid { grid-template-columns:1fr; }
+            .skills-grid { grid-template-columns:1fr; }
+            .offer-grid { grid-template-columns:1fr; }
+            .hero-btns { flex-direction:column; align-items:center; }
         }
     </style>
-    <!-- EmailJS SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script>
-    // Initialiser EmailJS avec votre Public Key
-    emailjs.init('MTovP8aquYyYSzzNN');
-</script>
 </head>
 <body>
-    <!-- Effets de fond futuristes -->
-    <div class="bg-effects">
-        <div class="grid-lines"></div>
-        <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
+
+<!-- Background -->
+<div class="bg-wrap">
+    <div class="grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+</div>
+
+<!-- Header -->
+<header>
+    <a href="#home" class="logo">MBENGONO A.</a>
+    <button class="burger" aria-label="Menu" id="burger">
+        <span></span><span></span><span></span>
+    </button>
+    <nav>
+        <ul id="navMenu">
+            <li><a href="#offer" data-lang-key="nav_offer">Offer</a></li>
+            <li><a href="#projects" data-lang-key="nav_projects">Projects</a></li>
+            <li><a href="#skills" data-lang-key="nav_skills">Skills</a></li>
+            <li><a href="#contact" data-lang-key="nav_contact">Contact</a></li>
+            <li><a href="#contact" class="nav-cta" data-lang-key="nav_cta">Get my website</a></li>
+            <li class="lang-group">
+                <button class="lang-btn" data-lang="fr">FR</button>
+                <button class="lang-btn active" data-lang="en">EN</button>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<!-- ── HERO ── -->
+<section id="home">
+    <div class="badge reveal"><i class="fas fa-bolt"></i> <span data-lang-key="badge">Available for new projects</span></div>
+    <h1 class="hero-title reveal" data-lang-key="heroTitle">I build clean, modern websites for businesses in 48 hours.</h1>
+    <p class="hero-sub reveal" data-lang-key="heroSub">Get a professional website that helps you attract more customers — fast and affordable.</p>
+    <div class="hero-btns reveal">
+        <a href="#contact" class="btn-primary" data-lang-key="heroCta"><i class="fas fa-rocket"></i> Get your website</a>
+        <a href="#projects" class="btn-ghost" data-lang-key="heroSee">See my work <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="hero-stats reveal">
+        <div class="stat"><div class="stat-num">48h</div><div class="stat-label" data-lang-key="stat1">Delivery time</div></div>
+        <div class="stat"><div class="stat-num">$300</div><div class="stat-label" data-lang-key="stat2">Fixed price</div></div>
+        <div class="stat"><div class="stat-num">5+</div><div class="stat-label" data-lang-key="stat3">Projects delivered</div></div>
+        <div class="stat"><div class="stat-num">100%</div><div class="stat-label" data-lang-key="stat4">Mobile-friendly</div></div>
+    </div>
+</section>
+
+<!-- ── PROFILE ── -->
+<section id="profile">
+    <div class="profile-img-wrap reveal">
+        <!--
+            PROFILE IMAGE:
+            Replace this placeholder div with:
+              <img src="images/profile.jpg" alt="Elisée Salomon" class="profile-img">
+            Recommended: 600×600 px, JPG/WebP, square crop
+        -->
+        <!-- <div class="profile-placeholder">
+            <i class="fas fa-user"></i>
+            <span>images/profile.jpg</span>
+        </div> -->
+
+        <img src="images/profile.jpg" alt="Elisée Salomon" class="profile-img">
+    </div>
+    <div class="profile-text reveal">
+        <span class="section-label" data-lang-key="profileLabel">Who I am</span>
+        <h2 class="profile-name">MBENGONO AKOA<br>ELISEE SALOMON</h2>
+        <p class="profile-role" data-lang-key="profileRole">Fullstack Developer · Based in Yaoundé, Cameroon</p>
+        <p class="profile-bio" data-lang-key="profileBio">Fullstack developer turning business ideas into high-performance websites. I hold a Bachelor's in Computer Science from the University of Yaoundé I and specialize in .NET Core and React.js. I deliver professional, responsive online solutions — often within 48 hours.</p>
+        <div class="profile-links">
+            <a href="https://www.linkedin.com/in/elis%C3%A9e-salomon-mbengono-akoa/" target="_blank" class="profile-link linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+            <a href="https://github.com/Mbengono-Akoa" target="_blank" class="profile-link github"><i class="fab fa-github"></i> GitHub</a>
         </div>
     </div>
+</section>
 
-    <!-- En-tête avec navigation -->
-    <header>
-        <a href="#" class="logo">PORTFOLIO</a>
-        
-        <button class="menu-toggle" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        
-        <nav>
-            <ul>
-                <li><a href="#home" data-lang-key="home">Accueil</a></li>
-                <li><a href="#about" data-lang-key="about">À propos</a></li>
-                <li><a href="#projects" data-lang-key="projects">Projets</a></li>
-                <li><a href="#skills" data-lang-key="skills">Compétences</a></li>
-                <li><a href="#contact" data-lang-key="contact">Contact</a></li>
-                <li class="lang-switcher">
-                    <button class="lang-btn active" data-lang="fr">FR</button>
-                    <button class="lang-btn" data-lang="en">EN</button>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Section Hero -->
-    <section id="home" class="hero">
-        <h1 data-lang-key="heroTitle">Développeur FullStack</h1>
-        <p data-lang-key="heroSubtitle">Créateur d'expériences digitales innovantes qui transcendent les frontières du possible</p>
-        <a href="#contact" class="cta-button" data-lang-key="ctaButton">Travaillons ensemble</a>
-    </section>
-
-    <!-- Section À propos -->
-    <section id="about">
-        <h2 class="section-title" data-lang-key="aboutTitle">À propos de moi</h2>
-        <div class="about-content">
-            <p data-lang-key="aboutText1">Je suis développeur Full Stack et titulaire d'une licence en informatique de l'Université de Yaoundé I (2023). Passionné par la création de solutions numériques innovantes et percutantes, je suis spécialisé en .NET Core, React.js et Flutter. J'ai dirigé et contribué à divers projets, allant d'applications mobiles comme JeLoueTaCaisse à des systèmes d'entreprise pour des entreprises comme LuxSoft et CodeAutCam. Mon expertise couvre la création d'API évolutives, la conception d'interfaces utilisateur et d'expérience utilisateur intuitives et l'optimisation des performances pour des expériences utilisateur fluides.</p>
-            <p data-lang-key="aboutText2">Fort de solides bases en C#, Next.js et Angular, je m'épanouis en transformant des défis complexes en applications élégantes et centrées sur l'utilisateur. Mon travail reflète un engagement envers les technologies modernes, la résolution collaborative des problèmes et la création de valeur mesurable pour nos clients et utilisateurs finaux. Que ce soit pour développer des plateformes web réactives ou des solutions mobiles innovantes, je m'engage à repousser les limites de l'innovation tout en garantissant fiabilité et évolutivité. Explorez mon portfolio et découvrez comment j'allie créativité, expertise technique et vision d'avenir pour donner vie à mes idées.</p>
+<!-- ── OFFER ── -->
+<section id="offer">
+    <div style="text-align:center">
+        <span class="section-label reveal" data-lang-key="offerLabel">What you get</span>
+        <h2 class="section-title reveal" data-lang-key="offerTitle">Everything your business needs <span>online</span></h2>
+        <p class="section-sub reveal" style="margin:0 auto 50px" data-lang-key="offerSub">One flat price. No hidden fees. No waiting weeks.</p>
+    </div>
+    <div class="offer-grid">
+        <div class="offer-card reveal">
+            <div class="offer-icon"><i class="fas fa-bolt"></i></div>
+            <h3 data-lang-key="o1">48-Hour Delivery</h3>
+            <p data-lang-key="o1d">Your website goes live in 2 days — guaranteed.</p>
         </div>
-    </section>
-
-    <!-- Section Projets -->
-    <section id="projects">
-        <h2 class="section-title" data-lang-key="projectsTitle">Mes Projets</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-img">
-                    <i class="fas fa-globe"></i>
-                </div>
-                <div class="project-content">
-                    <h3 data-lang-key="project1Title">Plateforme IA</h3>
-                    <p data-lang-key="project1Desc">Développement d'une plateforme d'intelligence artificielle pour l'analyse prédictive.</p>
-                    <div class="project-tags">
-                        <span>AI</span>
-                        <span>React</span>
-                        <span>Node.js</span>
-                    </div>
-                </div>
+        <div class="offer-card reveal">
+            <div class="offer-icon"><i class="fas fa-mobile-alt"></i></div>
+            <h3 data-lang-key="o2">Mobile-Friendly Design</h3>
+            <p data-lang-key="o2d">Looks perfect on every phone, tablet, and screen size.</p>
+        </div>
+        <div class="offer-card reveal">
+            <div class="offer-icon"><i class="fas fa-palette"></i></div>
+            <h3 data-lang-key="o3">Clean Modern UI</h3>
+            <p data-lang-key="o3d">Professional, elegant design that builds trust instantly.</p>
+        </div>
+        <div class="offer-card reveal">
+            <div class="offer-icon"><i class="fab fa-whatsapp"></i></div>
+            <h3 data-lang-key="o4">Contact Form & WhatsApp</h3>
+            <p data-lang-key="o4d">Your customers can reach you directly from the site.</p>
+        </div>
+        <div class="offer-card reveal">
+            <div class="offer-icon"><i class="fas fa-search"></i></div>
+            <h3 data-lang-key="o5">SEO-Ready</h3>
+            <p data-lang-key="o5d">Built to be found on Google from day one.</p>
+        </div>
+        <div class="offer-card reveal">
+            <div class="offer-icon"><i class="fas fa-headset"></i></div>
+            <h3 data-lang-key="o6">Post-Delivery Support</h3>
+            <p data-lang-key="o6d">Quick revisions and support after launch included.</p>
+        </div>
+        <div class="price-block reveal">
+            <div class="price-left">
+                <h3 data-lang-key="pTitle">Complete Business Website Package</h3>
+                <p data-lang-key="pDesc">Everything above included. I can create a sample homepage before you commit — so you see exactly what you're getting before paying.</p>
             </div>
-            <div class="project-card">
-                <div class="project-img">
-                    <i class="fas fa-mobile-alt"></i>
-                </div>
-                <div class="project-content">
-                    <h3 data-lang-key="project2Title">Application AR</h3>
-                    <p data-lang-key="project2Desc">Création d'une application de réalité augmentée pour l'industrie du retail.</p>
-                    <div class="project-tags">
-                        <span>AR</span>
-                        <span>Unity</span>
-                        <span>iOS/Android</span>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-img">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <div class="project-content">
-                    <h3 data-lang-key="project3Title">Dashboard Analytics</h3>
-                    <p data-lang-key="project3Desc">Conception d'un tableau de bord analytique avec visualisations de données en temps réel.</p>
-                    <div class="project-tags">
-                        <span>Vue.js</span>
-                        <span>D3.js</span>
-                        <span>API</span>
-                    </div>
-                </div>
+            <div style="text-align:right">
+                <div class="price-tag">$300 <span data-lang-key="pFlat">flat</span></div>
+                <div class="price-note" data-lang-key="pNote">⚡ Delivered in 48 hours</div>
+                <a href="#contact" class="btn-primary" style="margin-top:16px; display:inline-flex" data-lang-key="pCta">Start now</a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Section Compétences -->
-    <section id="skills">
-        <h2 class="section-title" data-lang-key="skillsTitle">Mes Compétences</h2>
-        <div class="skills-container">
-            <div class="skill-item">
-                <div class="skill-icon">
-                    <i class="fas fa-code"></i>
+<!-- ── PROJECTS ── -->
+<section id="projects">
+    <div style="text-align:center">
+        <span class="section-label reveal" data-lang-key="projLabel">Real work</span>
+        <h2 class="section-title reveal" data-lang-key="projTitle">Projects I've <span>built</span></h2>
+        <p class="section-sub reveal" style="margin:0 auto 50px" data-lang-key="projSub">Real websites for real businesses — here's what I deliver.</p>
+    </div>
+    <div class="projects-grid">
+
+        <!-- Project 1: Agrofresh -->
+        <div class="project-card reveal">
+            <div class="project-thumb">
+                <!--
+                    REPLACE WITH:
+                    <img src="images/projects/agrofresh.png" alt="Agrofresh"
+                         class="project-thumb-img">
+                    or for GIF demo:
+                    <img src="images/projects/agrofresh-demo.gif" alt="Agrofresh"
+                         class="project-thumb-img">
+                    Size: 1200×800 px recommended
+                -->
+                <i class="fas fa-leaf"></i>
+                <div class="thumb-label">
+                    <img src="images/projects/agrofresh.png" alt="Agrofresh"
+                         class="project-thumb-img">
                 </div>
-                <h3 data-lang-key="skill1Title">Développement Frontend</h3>
-                <p data-lang-key="skill1Desc">Création d'interfaces utilisateur modernes et réactives avec les dernières technologies.</p>
+                <span class="project-status live">Live</span>
             </div>
-            <div class="skill-item">
-                <div class="skill-icon">
-                    <i class="fas fa-server"></i>
+            <div class="project-body">
+                <h3>Agrofresh</h3>
+                <p data-lang-key="p1d">Business website showcasing agricultural services and products. Designed to attract buyers and establish credibility online.</p>
+                <div class="project-tags">
+                    <span>WordPress</span><span>Oxygen Builder</span><span>Javascript</span><span>ACF</span><span>WPML</span><span>UI/UX</span>
                 </div>
-                <h3 data-lang-key="skill2Title">Développement Backend</h3>
-                <p data-lang-key="skill2Desc">Architecture et développement d'APIs robustes et sécurisées.</p>
-            </div>
-            <div class="skill-item">
-                <div class="skill-icon">
-                    <i class="fas fa-paint-brush"></i>
-                </div>
-                <h3 data-lang-key="skill3Title">Design UI/UX</h3>
-                <p data-lang-key="skill3Desc">Conception d'expériences utilisateur intuitives et esthétiques.</p>
-            </div>
-            <div class="skill-item">
-                <div class="skill-icon">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <h3 data-lang-key="skill4Title">Intelligence Artificielle</h3>
-                <p data-lang-key="skill4Desc">Intégration de solutions d'IA et de machine learning.</p>
+                <a href="https://agrofresh.co.at/" target="_blank" class="project-link" data-lang-key="viewSite">Visit site <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
-    </section>
 
-    <!-- Section Contact -->
-    <section id="contact">
-        <h2 class="section-title" data-lang-key="contactTitle">Contactez-moi</h2>
-        <div class="contact-container">
-            <div class="contact-info">
+        <!-- Project 2: JeLoueTaCaisse -->
+        <div class="project-card reveal">
+            <div class="project-thumb">
+                <!--
+                    REPLACE WITH:
+                    <img src="images/projects/jelouetacaisse.png" alt="JeLoueTaCaisse"
+                         class="project-thumb-img">
+                    Size: 1200×800 px recommended
+                -->
+                <i class="fas fa-car"></i>
+                <div class="thumb-label">
+                    <img src="images/projects/carrental.png" alt="JeLoueTaCaisse"
+                         class="project-thumb-img">
+                </div>
+                <span class="project-status live">Live</span>
+            </div>
+            <div class="project-body">
+                <h3>JeLoueTaCaisse</h3>
+                <p data-lang-key="p2d">Platform for managing vehicle rentals and customer interactions. Streamlines bookings and improves the client experience.</p>
+                <div class="project-tags">
+                    <span>Vue js</span><span>Laravel</span><span>Eloquent</span><span>Flutter</span><span>MySQL</span><span>cPanel</span>
+                </div>
+                <a href="https://jelouetacaisse.com/" target="_blank" class="project-link" data-lang-key="viewSite">Visit site <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- Project 3: HireAfrica -->
+        <div class="project-card reveal">
+            <div class="project-thumb">
+                <!--
+                    REPLACE WITH:
+                    <img src="images/projects/hireafrica.png" alt="HireAfrica"
+                         class="project-thumb-img">
+                    Size: 1200×800 px recommended
+                    (No live link available — use screenshot mockup)
+                -->
+                <i class="fas fa-briefcase"></i>
+                <div class="thumb-label">
+                    <img src="images/projects/hire-africa.PNG" alt="HireAfrica"
+                         class="project-thumb-img">
+                </div>
+                <span class="project-status">In Portfolio</span>
+            </div>
+            <div class="project-body">
+                <h3>HireAfrica Job Board</h3>
+                <p data-lang-key="p3d">Job platform connecting candidates and companies across Africa. Simplifies the hiring process for both sides.</p>
+                <div class="project-tags">
+                    <span>Next.js</span><span>.NET 8</span><span>ASP .NET</span><span>Entity Framework Core</span><span>SQLServer</span><span>AWS</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 4: Kontely -->
+        <div class="project-card reveal">
+            <div class="project-thumb">
+                <!--
+                    REPLACE WITH:
+                    <img src="images/projects/kontely.png" alt="Kontely"
+                         class="project-thumb-img">
+                    Size: 1200×800 px recommended
+                -->
+                <i class="fas fa-rocket"></i>
+                <div class="thumb-label">
+                    <img src="images/projects/kontely.png" alt="Kontely"
+                         class="project-thumb-img">
+                </div>
+                <span class="project-status">In Portfolio</span>
+            </div>
+            <div class="project-body">
+                <h3>Kontely Landing Page</h3>
+                <p data-lang-key="p4d">Clean, conversion-focused landing page designed to turn visitors into leads. Fast, minimal, and effective.</p>
+                <div class="project-tags">
+                    <span>Next js</span><span>Tailwind</span><span>Conversion</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 5: Wemenu -->
+        <div class="project-card reveal">
+            <div class="project-thumb">
+                <!--
+                    REPLACE WITH:
+                    <img src="images/projects/wemenu.png" alt="Wemenu"
+                         class="project-thumb-img">
+                    Size: 1200×800 px recommended
+                -->
+                <i class="fas fa-utensils"></i>
+                <div class="thumb-label">
+                    <img src="images/projects/wemenu.png" alt="Wemenu"
+                         class="project-thumb-img">
+                </div>
+                <span class="project-status" style="background:rgba(255,165,0,.12);border-color:rgba(255,165,0,.4);color:#ffaa00">In Progress</span>
+            </div>
+            <div class="project-body">
+                <h3>Wemenu</h3>
+                <p data-lang-key="p5d">Real-time digital menu system for restaurants. Customers scan a QR code to view the menu — no app needed.</p>
+                <div class="project-tags">
+                    <span>Next js</span><span>Nest js</span><span>PostgreSQL</span><span>Redis</span><span>Docker</span><span>Cloudfare</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 6: McReseacrhGroup -->
+        <div class="project-card reveal">
+            <div class="project-thumb">
+                <!--
+                    REPLACE WITH:
+                    <img src="images/projects/wemenu.png" alt="Wemenu"
+                         class="project-thumb-img">
+                    Size: 1200×800 px recommended
+                -->
+                <i class="fas fa-utensils"></i>
+                <div class="thumb-label">
+                    <img src="images/projects/mcresearch.png" alt="Wemenu"
+                         class="project-thumb-img">
+                </div>
+                <span class="project-status" style="background:rgba(255,165,0,.12);border-color:rgba(255,165,0,.4);color:rgb(240, 82, 9)">In Maintenance</span>
+            </div>
+            <div class="project-body">
+                <h3>MC Research Group Blog</h3>
+                <p data-lang-key="p6d">Academic blog platform for two PhD graduates from ETS Montreal. Subscribers receive email notifications when new studies or posts are published.</p>
+                <div class="project-tags">
+                    <span>WordPress</span><span>Oxygen Builder</span><span>Javascript</span><span>ACF</span><span>UI/UX</span><span>Yoast SEO</span><span>Subscribe2</span><span>Hostinger</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+    <div style="text-align:center">
+        <span class="section-label reveal" data-lang-key="skillLabel">Tech stack</span>
+        <h2 class="section-title reveal" data-lang-key="skillTitle">Built with the right <span>tools</span></h2>
+        <p class="section-sub reveal" style="margin:0 auto 50px" data-lang-key="skillSub">Modern, battle-tested technologies for reliable results.</p>
+    </div>
+    <div class="skills-grid">
+        <div class="skill-card reveal">
+            <div class="skill-icon"><i class="fas fa-code"></i></div>
+            <h3 data-lang-key="sk1">Frontend</h3>
+            <p>React.js · Next.js · Angular · Flutter</p>
+        </div>
+        <div class="skill-card reveal">
+            <div class="skill-icon"><i class="fas fa-server"></i></div>
+            <h3 data-lang-key="sk2">Backend</h3>
+            <p>.NET Core · ASP .NET · Entity Framework Core · REST APIs · C#</p>
+        </div>
+        <div class="skill-card reveal">
+            <div class="skill-icon"><i class="fas fa-database"></i></div>
+            <h3 data-lang-key="sk4">Database</h3>
+            <p>PostgreSQL · SQL Server · MySQL · Firebase · MongoDB · Supabase</p>
+        </div>
+        <div class="skill-card reveal">
+            <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
+            <h3 data-lang-key="sk3">Mobile</h3>
+            <p>Flutter · iOS & Android · Cross-platform</p>
+        </div>
+        <div class="skill-card reveal">
+            <div class="skill-icon"><i class="fas fa-paint-brush"></i></div>
+            <h3 data-lang-key="sk5">UI/UX Design</h3>
+            <p>Figma · Tailwind · Responsive · Conversion-focused</p>
+        </div>
+        <div class="skill-card reveal">
+            <div class="skill-icon"><i class="fas fa-robot"></i></div>
+            <h3 data-lang-key="sk6">AI Integration</h3>
+            <p>OpenAI API · Machine Learning · Smart features</p>
+        </div>
+    </div>
+</section>
+
+<!-- ── EXPERIENCE ── -->
+<section id="experience" style="padding-top:0">
+    <div class="exp-box reveal">
+        <div class="exp-icon"><i class="fas fa-building"></i></div>
+        <h3 data-lang-key="expTitle">Professional Experience</h3>
+        <p data-lang-key="expDesc">I have contributed to real-world business platforms and production systems — including enterprise tools at Mosaique, LuxSoft and CodeAutCam. Details and references are available upon request.</p>
+        <a href="#contact" class="btn-ghost" style="display:inline-flex;margin-bottom:16px" data-lang-key="expCta">Request references</a>
+        <p class="exp-note" data-lang-key="expNote">Bachelor's degree in Computer Science</p>
+    </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+    <div style="text-align:center; margin-bottom:60px">
+        <span class="section-label reveal" data-lang-key="contactLabel">Let's build</span>
+        <h2 class="section-title reveal" data-lang-key="contactTitle">Want your website in <span>48 hours?</span></h2>
+        <p class="section-sub reveal" style="margin:0 auto" data-lang-key="contactSub">Send me a message and let's get started. I can create a sample homepage before you commit.</p>
+    </div>
+    <div class="contact-wrap">
+        <div class="reveal">
+            <div class="contact-items">
                 <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div>
-                        <h3 data-lang-key="emailTitle">Email</h3>
-                        <p><a href="mailto:salomonakoa44@gmail.com" class="contact-link">salomonakoa44@gmail.com</a></p>
+                    <div class="citem-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="citem-text">
+                        <h4 data-lang-key="cemail">Email</h4>
+                        <a href="mailto:salomonakoa44@gmail.com">salomonakoa44@gmail.com</a>
                     </div>
                 </div>
                 <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-phone"></i>
-                    </div>
-                    <div>
-                        <h3 data-lang-key="phoneTitle">Téléphone</h3>
-                        <p><a href="tel:+237695331745" class="contact-link">+237 6 95 33 17 45</a></p>
+                    <div class="citem-icon"><i class="fab fa-whatsapp"></i></div>
+                    <div class="citem-text">
+                        <h4>WhatsApp</h4>
+                        <a href="https://wa.me/237695331745" target="_blank">+237 6 95 33 17 45</a>
                     </div>
                 </div>
                 <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-map-marker-alt"></i>
+                    <div class="citem-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="citem-text">
+                        <h4 data-lang-key="clocation">Location</h4>
+                        <p data-lang-key="clocationVal">Yaoundé, Cameroon · Remote worldwide</p>
                     </div>
-                    <div>
-                        <h3 data-lang-key="locationTitle">Localisation</h3>
-                        <p data-lang-key="locationText">Yaoundé, Cameroun</p>
+                </div>
+                <div class="contact-item">
+                    <div class="citem-icon"><i class="fas fa-clock"></i></div>
+                    <div class="citem-text">
+                        <h4 data-lang-key="cturnaround">Turnaround</h4>
+                        <p style="color:var(--cyan);font-weight:600" data-lang-key="cturnaroundVal">48 hours from deposit</p>
                     </div>
                 </div>
             </div>
-            <div class="contact-form">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name" data-lang-key="formName">Nom</label>
-                        <input type="text" id="name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" data-lang-key="formEmail">Email</label>
-                        <input type="email" id="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message" data-lang-key="formMessage">Message</label>
-                        <textarea id="message" class="form-control" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn" data-lang-key="formSubmit">Envoyer le message</button>
-                </form>
-            </div>
         </div>
-    </section>
-
-    <!-- Pied de page -->
-    <footer>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/elis%C3%A9e-salomon-mbengono-akoa/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://github.com/Mbengono-Akoa" class="social-link"><i class="fab fa-github"></i></a>
-            <a href="https://medium.com/@salomonakoa44" class="social-link"><i class="fab fa-medium"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+        <div class="contact-form-wrap reveal">
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name" data-lang-key="fname">Your name</label>
+                    <input type="text" id="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" data-lang-key="femail">Email</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="message" data-lang-key="fmsg">Tell me about your project</label>
+                    <textarea id="message" class="form-control" placeholder="What kind of website do you need? What's your business?" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn" data-lang-key="fsend"><i class="fas fa-paper-plane"></i> Send message</button>
+            </form>
         </div>
-        <p class="copyright" data-lang-key="copyright">&copy; 2025 Portfolio. Tous droits réservés.</p>
-    </footer>
+    </div>
+</section>
 
-    <script>
-        // Données de traduction
-        const translations = {
-            fr: {
-                home: "Accueil",
-                about: "À propos",
-                projects: "Projets",
-                skills: "Compétences",
-                contact: "Contact",
-                heroTitle: "Développeur FullStack",
-                heroSubtitle: "Créateur d'expériences digitales innovantes qui transcendent les frontières du possible",
-                ctaButton: "Travaillons ensemble",
-                aboutTitle: "À propos de moi",
-                aboutText1: "Je suis développeur Full Stack et titulaire d'une licence en informatique de l'Université de Yaoundé I (2023). Passionné par la création de solutions numériques innovantes et percutantes, je suis spécialisé en .NET Core, React.js et Flutter. J'ai dirigé et contribué à divers projets, allant d'applications mobiles comme JeLoueTaCaisse à des systèmes d'entreprise pour des entreprises comme LuxSoft et CodeAutCam. Mon expertise couvre la création d'API évolutives, la conception d'interfaces utilisateur et d'expérience utilisateur intuitives et l'optimisation des performances pour des expériences utilisateur fluides.",
-                aboutText2: "Fort de solides bases en C#, Next.js et Angular, je m'épanouis en transformant des défis complexes en applications élégantes et centrées sur l'utilisateur. Mon travail reflète un engagement envers les technologies modernes, la résolution collaborative des problèmes et la création de valeur mesurable pour nos clients et utilisateurs finaux. Que ce soit pour développer des plateformes web réactives ou des solutions mobiles innovantes, je m'engage à repousser les limites de l'innovation tout en garantissant fiabilité et évolutivité. Explorez mon portfolio et découvrez comment j'allie créativité, expertise technique et vision d'avenir pour donner vie à mes idées.",
-                projectsTitle: "Mes Projets",
-                project1Title: "Plateforme IA",
-                project1Desc: "Développement d'une plateforme d'intelligence artificielle pour l'analyse prédictive.",
-                project2Title: "Application AR",
-                project2Desc: "Création d'une application de réalité augmentée pour l'industrie du retail.",
-                project3Title: "Dashboard Analytics",
-                project3Desc: "Conception d'un tableau de bord analytique avec visualisations de données en temps réel.",
-                skillsTitle: "Mes Compétences",
-                skill1Title: "Développement Frontend",
-                skill1Desc: "Création d'interfaces utilisateur modernes et réactives avec les dernières technologies.",
-                skill2Title: "Développement Backend",
-                skill2Desc: "Architecture et développement d'APIs robustes et sécurisées.",
-                skill3Title: "Design UI/UX",
-                skill3Desc: "Conception d'expériences utilisateur intuitives et esthétiques.",
-                skill4Title: "Intelligence Artificielle",
-                skill4Desc: "Intégration de solutions d'IA et de machine learning.",
-                contactTitle: "Contactez-moi",
-                emailTitle: "Email",
-                phoneTitle: "Téléphone",
-                locationTitle: "Localisation",
-                locationText: "Yaoundé, Cameroun",
-                formName: "Nom",
-                formEmail: "Email",
-                formMessage: "Message",
-                formSubmit: "Envoyer le message",
-                copyright: "© 2025 Portfolio. Tous droits réservés."
-            },
-            en: {
-                home: "Home",
-                about: "About",
-                projects: "Projects",
-                skills: "Skills",
-                contact: "Contact",
-                heroTitle: "FullStack Developer",
-                heroSubtitle: "Creator of innovative digital experiences that transcend the boundaries of possibility",
-                ctaButton: "Let's work together",
-                aboutTitle: "About me",
-                aboutText1: "I am a Full Stack Developer with a Bachelor’s degree in Computer Science from the University of Yaoundé I (2023), driven by a passion for crafting innovative and impactful digital solutions. Specializing in .NET Core, React.js, and Flutter, I have led and contributed to diverse projects, from mobile apps like JeLoueTaCaisse to enterprise systems at companies such as LuxSoft and CodeAutCam. My expertise spans building scalable APIs, designing intuitive UI/UX, and optimizing performance for seamless user experiences.",
-                aboutText2: "With a strong foundation in C#, Next.js, and Angular, I thrive in transforming complex challenges into elegant, user-focused applications. My work reflects a commitment to modern technologies, collaborative problem-solving, and delivering measurable value to clients and end-users. Whether developing responsive web platforms or pioneering mobile solutions, I am dedicated to pushing the boundaries of innovation while ensuring reliability and scalability.Explore my portfolio to see how I blend creativity, technical expertise, and a forward-thinking mindset to bring ideas to life.",
-                projectsTitle: "My Projects",
-                project1Title: "AI Platform",
-                project1Desc: "Development of an artificial intelligence platform for predictive analysis.",
-                project2Title: "AR Application",
-                project2Desc: "Creation of an augmented reality application for the retail industry.",
-                project3Title: "Analytics Dashboard",
-                project3Desc: "Design of an analytical dashboard with real-time data visualizations.",
-                skillsTitle: "My Skills",
-                skill1Title: "Frontend Development",
-                skill1Desc: "Creation of modern and reactive user interfaces with the latest technologies.",
-                skill2Title: "Backend Development",
-                skill2Desc: "Architecture and development of robust and secure APIs.",
-                skill3Title: "UI/UX Design",
-                skill3Desc: "Design of intuitive and aesthetic user experiences.",
-                skill4Title: "Artificial Intelligence",
-                skill4Desc: "Integration of AI and machine learning solutions.",
-                contactTitle: "Contact me",
-                emailTitle: "Email",
-                phoneTitle: "Phone",
-                locationTitle: "Location",
-                locationText: "Yaounde, Cameroon",
-                formName: "Name",
-                formEmail: "Email",
-                formMessage: "Message",
-                formSubmit: "Send message",
-                copyright: "© 2025 Portfolio. All rights reserved."
-            }
-        };
+<!-- Footer -->
+<footer>
+    <div class="socials">
+        <a href="https://www.linkedin.com/in/elis%C3%A9e-salomon-mbengono-akoa/" target="_blank" class="soc-link"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/Mbengono-Akoa" target="_blank" class="soc-link"><i class="fab fa-github"></i></a>
+        <a href="https://medium.com/@salomonakoa44" target="_blank" class="soc-link"><i class="fab fa-medium"></i></a>
+        <a href="https://wa.me/237695331745" target="_blank" class="soc-link"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p class="copy" data-lang-key="footer">© 2026 MBENGONO AKOA ELISEE SALOMON. All rights reserved.</p>
+</footer>
 
-        // Gestion du changement de langue
-        document.addEventListener('DOMContentLoaded', function() {
-            const langButtons = document.querySelectorAll('.lang-btn');
-            let currentLang = 'fr'; // Langue par défaut
-            
-            // Fonction pour changer la langue
-            function changeLanguage(lang) {
-                currentLang = lang;
-                
-                // Mettre à jour les boutons de langue
-                langButtons.forEach(btn => {
-                    if (btn.dataset.lang === lang) {
-                        btn.classList.add('active');
-                    } else {
-                        btn.classList.remove('active');
-                    }
-                });
-                
-                // Mettre à jour tous les éléments avec l'attribut data-lang-key
-                document.querySelectorAll('[data-lang-key]').forEach(element => {
-                    const key = element.getAttribute('data-lang-key');
-                    if (translations[lang] && translations[lang][key]) {
-                        element.textContent = translations[lang][key];
-                    }
-                });
-            }
-            
-            // Événements sur les boutons de langue
-            langButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const lang = this.dataset.lang;
-                    changeLanguage(lang);
-                });
-            });
-            
-            // Gestion du menu burger
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navMenu = document.querySelector('nav ul');
-            
-            if (menuToggle) {
-                menuToggle.addEventListener('click', function() {
-                    navMenu.classList.toggle('active');
-                    
-                    // Animation du bouton burger
-                    const spans = menuToggle.querySelectorAll('span');
-                    if (navMenu.classList.contains('active')) {
-                        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                        spans[1].style.opacity = '0';
-                        spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-                    } else {
-                        spans[0].style.transform = 'none';
-                        spans[1].style.opacity = '1';
-                        spans[2].style.transform = 'none';
-                    }
-                });
-            }
-            
-            // Fermer le menu lorsqu'on clique sur un lien
-            document.querySelectorAll('nav ul li a').forEach(link => {
-                link.addEventListener('click', function() {
-                    navMenu.classList.remove('active');
-                    const spans = menuToggle.querySelectorAll('span');
-                    spans[0].style.transform = 'none';
-                    spans[1].style.opacity = '1';
-                    spans[2].style.transform = 'none';
-                });
-            });
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── TRANSLATIONS ──
+const t = {
+    en: {
+        badge:"Available for new projects", heroTitle:"I build clean, modern websites for businesses in 48 hours.",
+        heroSub:"Get a professional website that helps you attract more customers — fast and affordable.",
+        heroCta:"Get your website", heroSee:"See my work", stat1:"Delivery time", stat2:"Fixed price",
+        stat3:"Projects delivered", stat4:"Mobile-friendly",
+        profileLabel:"Who I am", profileRole:"Fullstack Developer · Based in Yaoundé, Cameroon",
+        profileBio:"Fullstack developer turning business ideas into high-performance websites. I hold a Bachelor's in Computer Science from the University of Yaoundé I and specialize in .NET Core and React.js. I deliver professional, responsive online solutions — often within 48 hours.",
+        offerLabel:"What you get", offerTitle:"Everything your business needs online",
+        offerSub:"One flat price. No hidden fees. No waiting weeks.",
+        o1:"48-Hour Delivery", o1d:"Your website goes live in 2 days — guaranteed.",
+        o2:"Mobile-Friendly Design", o2d:"Looks perfect on every phone, tablet, and screen size.",
+        o3:"Clean Modern UI", o3d:"Professional, elegant design that builds trust instantly.",
+        o4:"Contact Form & WhatsApp", o4d:"Your customers can reach you directly from the site.",
+        o5:"SEO-Ready", o5d:"Built to be found on Google from day one.",
+        o6:"Post-Delivery Support", o6d:"Quick revisions and support after launch included.",
+        pTitle:"Complete Business Website Package",
+        pDesc:"Everything above included. I can create a sample homepage before you commit — so you see exactly what you're getting before paying.",
+        pFlat:"flat", pNote:"⚡ Delivered in 48 hours", pCta:"Start now",
+        projLabel:"Real work", projTitle:"Projects I've built",
+        projSub:"Real websites for real businesses — here's what I deliver.",
+        p1d:"Business website showcasing agricultural services and products. Designed to attract buyers and establish credibility online.",
+        p2d:"Platform for managing vehicle rentals and customer interactions. Streamlines bookings and improves the client experience.",
+        p3d:"Job platform connecting candidates and companies across Africa. Simplifies the hiring process for both sides.",
+        p4d:"Clean, conversion-focused landing page designed to turn visitors into leads. Fast, minimal, and effective.",
+        p5d:"Real-time digital menu system for restaurants. Customers scan a QR code to view the menu — no app needed.",
+        p6d:"Academic blog platform for two PhD graduates from ETS Montreal. Subscribers receive email notifications when new studies or posts are published.",
+        viewSite:"Visit site",
+        skillLabel:"Tech stack", skillTitle:"Built with the right tools",
+        skillSub:"Modern, battle-tested technologies for reliable results.",
+        sk1:"Frontend", sk2:"Backend", sk3:"Mobile", sk4:"Database", sk5:"UI/UX Design", sk6:"AI Integration",
+        expTitle:"Professional Experience",
+        expDesc:"I have contributed to real-world business platforms and production systems — including enterprise tools at Mosaique, LuxSoft and CodeAutCam. Details and references are available upon request.",
+        expCta:"Request references", expNote:"Bachelor's degree in Computer Science",
+        contactLabel:"Let's build", contactTitle:"Want your website in 48 hours?",
+        contactSub:"Send me a message and let's get started. I can create a sample homepage before you commit.",
+        cemail:"Email", clocation:"Location", clocationVal:"Yaoundé, Cameroon · Remote worldwide",
+        cturnaround:"Turnaround", cturnaroundVal:"48 hours from deposit",
+        fname:"Your name", femail:"Email", fmsg:"Tell me about your project",
+        fsend:"Send message", footer:"© 2026 MBENGONO AKOA ELISEE SALOMON. All rights reserved.",
+        nav_offer:"Offer", nav_projects:"Projects", nav_skills:"Skills", nav_contact:"Contact", nav_cta:"Get my website"
+    },
+    fr: {
+        badge:"Disponible pour de nouveaux projets", heroTitle:"Je crée des sites web modernes pour les entreprises en 48 heures.",
+        heroSub:"Obtenez un site professionnel qui attire plus de clients — rapide et abordable.",
+        heroCta:"Obtenir mon site", heroSee:"Voir mes projets", stat1:"Délai de livraison", stat2:"Prix fixe",
+        stat3:"Projets livrés", stat4:"Compatible mobile",
+        profileLabel:"Qui suis-je", profileRole:"Développeur Fullstack · Yaoundé, Cameroun",
+        profileBio:"Développeur fullstack aidant les entreprises à créer des sites web rapides et efficaces. Titulaire d'une licence en informatique de l'Université de Yaoundé I, spécialisé en .NET Core et React.js.",
+        offerLabel:"Ce que vous obtenez", offerTitle:"Tout ce dont votre entreprise a besoin en ligne",
+        offerSub:"Un prix fixe. Aucun frais caché. Pas d'attente.",
+        o1:"Livraison en 48h", o1d:"Votre site est en ligne en 2 jours — garanti.",
+        o2:"Design responsive", o2d:"Parfait sur téléphone, tablette et écran.",
+        o3:"UI moderne", o3d:"Design professionnel qui inspire confiance.",
+        o4:"Formulaire & WhatsApp", o4d:"Vos clients vous contactent directement depuis le site.",
+        o5:"SEO intégré", o5d:"Conçu pour être trouvé sur Google dès le premier jour.",
+        o6:"Support post-livraison", o6d:"Révisions rapides et support inclus après le lancement.",
+        pTitle:"Pack site web complet", pDesc:"Tout ce qui précède inclus. Je peux créer une maquette de la page d'accueil avant que vous vous engagiez.",
+        pFlat:"fixe", pNote:"⚡ Livré en 48 heures", pCta:"Commencer",
+        projLabel:"Travaux réels", projTitle:"Projets réalisés",
+        projSub:"De vrais sites pour de vraies entreprises — voici ce que je livre.",
+        p1d:"Site vitrine pour une entreprise agricole. Conçu pour attirer des acheteurs et établir une crédibilité en ligne.",
+        p2d:"Plateforme de gestion de location de véhicules et d'interactions clients.",
+        p3d:"Plateforme d'emploi reliant candidats et entreprises à travers l'Afrique.",
+        p4d:"Landing page épurée conçue pour convertir les visiteurs en prospects.",
+        p5d:"Menu digital en temps réel pour restaurants. Les clients scannent un QR code.",
+        p6d:"Plateforme de blog académique pour deux diplômés de doctorat de l’ETS de Montréal. Les abonnés reçoivent des notifications par email à chaque nouvelle étude ou publication.",
+        viewSite:"Voir le site",
+        skillLabel:"Technologies", skillTitle:"Construit avec les bons outils",
+        skillSub:"Technologies modernes et éprouvées pour des résultats fiables.",
+        sk1:"Frontend", sk2:"Backend", sk3:"Mobile", sk4:"Base de données", sk5:"Design UI/UX", sk6:"IA",
+        expTitle:"Expérience professionnelle",
+        expDesc:"J'ai contribué à des plateformes réelles et des systèmes en production — notamment chez Mosaique, LuxSoft et CodeAutCam. Détails et références disponibles sur demande.",
+        expCta:"Demander des références", expNote:"Licence en Informatique",
+        contactLabel:"Travaillons", contactTitle:"Votre site en 48 heures ?",
+        contactSub:"Envoyez-moi un message. Je peux créer une maquette avant que vous vous engagiez.",
+        cemail:"Email", clocation:"Localisation", clocationVal:"Yaoundé, Cameroun · Télétravail",
+        cturnaround:"Délai", cturnaroundVal:"48h après acompte",
+        fname:"Votre nom", femail:"Email", fmsg:"Parlez-moi de votre projet",
+        fsend:"Envoyer le message", footer:"© 2026 MBENGONO AKOA ELISEE SALOMON. Tous droits réservés.",
+        nav_offer:"Offre", nav_projects:"Projets", nav_skills:"Compétences", nav_contact:"Contact", nav_cta:"Mon site →"
+    }
+};
 
-            // Gestion du formulaire de contact avec envoi d'email
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Récupérer les données du formulaire
-                    const formData = new FormData(contactForm);
-                    const name = formData.get('name');
-                    const email = formData.get('email');
-                    const message = formData.get('message');
-                    
-                    // Utiliser EmailJS pour envoyer l'email
-                    emailjs.send('service_y200h5m', 'template_2zmsh2r', {
-                        from_name: name,
-                        from_email: email,
-                        message: message,
-                        to_email: 'salomonakoa44@gmail.com'
-                    })
-                    .then(function(response) {
-                        alert(currentLang === 'fr' 
-                            ? 'Message envoyé avec succès!' 
-                            : 'Message sent successfully!');
-                        contactForm.reset();
-                    }, function(error) {
-                        // Fallback: ouvrir le client email par défaut
-                        const subject = encodeURIComponent('Contact depuis le portfolio');
-                        const body = encodeURIComponent(`Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-                        window.location.href = `mailto:salomonakoa44@gmail.com?subject=${subject}&body=${body}`;
-                        
-                        alert(currentLang === 'fr' 
-                            ? 'Redirection vers votre client email...' 
-                            : 'Redirecting to your email client...');
-                        contactForm.reset();
-                    });
-                });
-            }
-            
-            // Animation au défilement
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-            
-            // Observer les éléments à animer
-            document.querySelectorAll('section, .project-card, .skill-item').forEach(el => {
-                el.style.opacity = 0;
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                observer.observe(el);
-            });
-        });
-    </script>
+let lang = 'en';
+
+function applyLang(l) {
+    lang = l;
+    document.querySelectorAll('[data-lang-key]').forEach(el => {
+        const k = el.getAttribute('data-lang-key');
+        if (t[l][k]) el.textContent = t[l][k];
+    });
+    document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === l);
+    });
+}
+
+document.querySelectorAll('.lang-btn').forEach(b => {
+    b.addEventListener('click', () => applyLang(b.dataset.lang));
+});
+
+// ── BURGER ──
+const burger = document.getElementById('burger');
+const menu = document.getElementById('navMenu');
+burger.addEventListener('click', () => {
+    menu.classList.toggle('open');
+    const spans = burger.querySelectorAll('span');
+    const open = menu.classList.contains('open');
+    spans[0].style.transform = open ? 'rotate(45deg) translate(5px,5px)' : '';
+    spans[1].style.opacity = open ? '0' : '1';
+    spans[2].style.transform = open ? 'rotate(-45deg) translate(7px,-6px)' : '';
+});
+document.querySelectorAll('nav a').forEach(a => {
+    a.addEventListener('click', () => {
+        menu.classList.remove('open');
+        burger.querySelectorAll('span').forEach(s => { s.style.transform=''; s.style.opacity='1'; });
+    });
+});
+
+// ── SCROLL REVEAL ──
+const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ── CONTACT FORM ──
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    emailjs.send('service_y200h5m', 'template_2zmsh2r', {
+        from_name: name, from_email: email,
+        message: message, to_email: 'salomonakoa44@gmail.com'
+    }).then(() => {
+        alert(lang === 'fr' ? 'Message envoyé avec succès !' : 'Message sent successfully!');
+        this.reset();
+    }, () => {
+        const subj = encodeURIComponent('Website project inquiry');
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+        window.location.href = `mailto:salomonakoa44@gmail.com?subject=${subj}&body=${body}`;
+        this.reset();
+    });
+});
+
+// Init
+applyLang('en');
+</script>
 </body>
-
 </html>
-
-
-
