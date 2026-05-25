@@ -724,7 +724,7 @@
     <div class="hero-stats reveal">
         <div class="stat"><div class="stat-num">48h</div><div class="stat-label" data-lang-key="stat1">Website delivery</div></div>
         <div class="stat"><div class="stat-num">$300+</div><div class="stat-label" data-lang-key="stat2">Starting price</div></div>
-        <div class="stat"><div class="stat-num">8+</div><div class="stat-label" data-lang-key="stat3">Projects delivered</div></div>
+        <div class="stat"><div class="stat-num">9+</div><div class="stat-label" data-lang-key="stat3">Projects delivered</div></div>
         <div class="stat"><div class="stat-num">100%</div><div class="stat-label" data-lang-key="stat4">Mobile-friendly</div></div>
     </div>
 </section>
@@ -920,21 +920,7 @@
             </div>
         </div>
 
-        <!-- Project 7: Wemenu (video, not online) -->
-        <div class="project-card reveal" data-modal="wemenu">
-            <div class="project-thumb">
-                <img src="images/projects/wemenu.png" alt="Wemenu" class="project-thumb-img" onerror="this.style.display='none'">
-                <span class="project-status" style="background:rgba(255,165,0,.12);border-color:rgba(255,165,0,.4);color:#ffaa00">In Progress</span>
-                <div class="project-view-btn"><span><i class="fas fa-eye"></i> View project</span></div>
-            </div>
-            <div class="project-body">
-                <h3>Wemenu</h3>
-                <p>Real-time digital menu system. Customers scan a QR code to view the menu — no app needed.</p>
-                <div class="project-tags"><span>Next.js</span><span>Nest.js</span><span>PostgreSQL</span><span>Redis</span><span>Docker</span></div>
-            </div>
-        </div>
-
-        <!-- Project 8: Agrofresh (images only) -->
+        <!-- Project 7: Agrofresh (images only) -->
         <div class="project-card reveal" data-modal="agrofresh">
             <div class="project-thumb">
                 <img src="images/projects/agrofresh.png" alt="Agrofresh" class="project-thumb-img" onerror="this.style.display='none'">
@@ -949,7 +935,36 @@
             </div>
         </div>
 
-        <!-- Project 9: McResearchGroup (few images) -->
+        <!-- Project 8: RoyalDrive (video,online) -->
+        <div class="project-card reveal" data-modal="globaldrive">
+            <div class="project-thumb">
+                <img src="images/projects/globaldrive.png" alt="GlobalDrive" class="project-thumb-img" onerror="this.style.display='none'">
+                <span class="project-status live">Live</span>
+                <div class="project-view-btn"><span><i class="fas fa-images"></i> View project</span></div>
+            </div>
+            <div class="project-body">
+                <h3>RoyalDrive</h3>
+                <p data-lang-key="p7d">Platform for booking cars for airport transfers and managing reservations.</p>
+                <div class="project-tags"><span>Next.js</span><span>.NET 10</span><span>Firebase</span><span>Vercel</span><span>Hostinger</span><span>Google Cloud</span><span>PayPal</span></div>
+                <a href="https://www.royaldrivecameroun.com/" target="_blank" class="project-link" onclick="event.stopPropagation()" data-lang-key="viewSite">Visit site <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- Project 9: Wemenu (video, not online) -->
+        <div class="project-card reveal" data-modal="wemenu">
+            <div class="project-thumb">
+                <img src="images/projects/wemenu.png" alt="Wemenu" class="project-thumb-img" onerror="this.style.display='none'">
+                <span class="project-status" style="background:rgba(255,165,0,.12);border-color:rgba(255,165,0,.4);color:#ffaa00">In Progress</span>
+                <div class="project-view-btn"><span><i class="fas fa-eye"></i> View project</span></div>
+            </div>
+            <div class="project-body">
+                <h3>Wemenu</h3>
+                <p>Real-time digital menu system. Customers scan a QR code to view the menu — no app needed.</p>
+                <div class="project-tags"><span>Next.js</span><span>Nest.js</span><span>PostgreSQL</span><span>Redis</span><span>Docker</span></div>
+            </div>
+        </div>
+
+        <!-- Project 10: McResearchGroup (few images) -->
         <div class="project-card reveal" data-modal="mcresearch">
             <div class="project-thumb">
                 <img src="images/projects/mcresearch.png" alt="McResearchGroup" class="project-thumb-img" onerror="this.style.display='none'">
@@ -1057,6 +1072,19 @@
                 </div>
             </div>
         </div>
+        <div class="testi-card reveal">
+            <div class="testi-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="testi-text">"Working with Salomon was a great experience. He has a rare ability to turn ideas into fully functional solutions and tackle complex problems with confidence and precision."</p>
+            <div class="testi-author">
+                <div class="testi-avatar">DA</div>
+                <div>
+                    <div class="testi-name">Daniel Amang</div>
+                    <div class="testi-location"><i class="fas fa-map-marker-alt"></i> Canada</div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -1088,6 +1116,10 @@
                 <img class="logo-large" src="images/partners/hireafrica.png" alt="HireAfrica">
             </div>
 
+            <div class="partner-item">
+                <img class="logo-large" src="images/partners/royal.png" alt="RoyalDrive">
+            </div>
+
             <!-- DUPLICATE SET (for seamless loop) -->
             <div class="partner-item text cyan">Wemenu</div>
 
@@ -1107,6 +1139,10 @@
 
             <div class="partner-item">
                 <img class="logo-large" src="images/partners/hireafrica.png" alt="HireAfrica">
+            </div>
+
+            <div class="partner-item">
+                <img class="logo-large" src="images/partners/royal.png" alt="RoyalDrive">
             </div>
 
         </div>
@@ -1202,6 +1238,13 @@ const projects = {
         images: ['images/projects/grill-and-chill.png'],
         tags: ['Next.js','Tailwind','UI/UX','Responsive','Performance'],
         url: 'https://grill-and-chill-taupe.vercel.app/'
+    },
+    globaldrive: {
+        title: 'RoyalDrive – Car Rental Platform',
+        video: 'images/projects/videos/royaldrive.mp4',
+        images: ['images/projects/globaldrive.png'],
+        tags: ['Next.js','.NET 10', 'Firebase', 'Vercel', 'Google Cloud', 'PayPal', 'Hostinger','UI/UX','Responsive','Performance'],
+        url: 'https://www.royaldrivecameroun.com/'
     },
     jeloue: {
         title: 'JeLoueTaCaisse',
@@ -1360,7 +1403,7 @@ document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 const t = {
     en: {
         badge:"Available for new projects",
-        heroTitle:"Fullstack Developer — From Idea to Live Product.",
+        heroTitle:"From Idea to Live Product.",
         heroSub:"I build websites, web apps, and platforms that businesses rely on. Clean, modern, and delivered fast.",
         heroCta:"Start a project", heroSee:"See my work",
         stat1:"Website delivery", stat2:"Starting price", stat3:"Projects delivered", stat4:"Mobile-friendly",
@@ -1391,6 +1434,7 @@ const t = {
         projSub:"Click any project to see it in action.",
         p1d:"Business website showcasing agricultural services. Designed to attract buyers and establish credibility.",
         p6d:"Academic blog platform for two PhD graduates from ETS Montreal. Email notifications on new publications.",
+        p7d:"Platform for booking cars for airport transfers and managing reservations.",
         viewSite:"Visit site",
         skillLabel:"Tech stack", skillTitle:"Built with the right tools",
         skillSub:"Modern, battle-tested technologies for reliable results.",
@@ -1410,7 +1454,7 @@ const t = {
     },
     fr: {
         badge:"Disponible pour de nouveaux projets",
-        heroTitle:"Développeur Fullstack — De l'idée au produit en ligne.",
+        heroTitle:"De l'idée au produit en ligne.",
         heroSub:"Je crée des sites web, applications et plateformes fiables. Moderne, rapide et sur mesure.",
         heroCta:"Démarrer un projet", heroSee:"Voir mes projets",
         stat1:"Délai de livraison", stat2:"Prix à partir de", stat3:"Projets livrés", stat4:"Compatible mobile",
@@ -1441,6 +1485,7 @@ const t = {
         projSub:"Cliquez sur un projet pour le voir en action.",
         p1d:"Site vitrine pour une entreprise agricole. Conçu pour attirer des acheteurs et établir une crédibilité.",
         p6d:"Plateforme de blog académique pour deux docteurs de l'ETS Montréal. Notifications email à chaque publication.",
+        p7d:"Plateforme de réservation de voitures pour les transferts aéroport et de gestion des réservations.",
         viewSite:"Voir le site",
         skillLabel:"Technologies", skillTitle:"Construit avec les bons outils",
         skillSub:"Technologies modernes et éprouvées pour des résultats fiables.",
